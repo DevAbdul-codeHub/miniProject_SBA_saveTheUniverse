@@ -12,7 +12,7 @@ class Ship {
             console.log(`---> ${attackedShip.name} <--- JUST GOT HIT! Health: ${attackedShip.hull}.\n`)
           
             if(attackedShip.hull <= 0){
-                console.log(`${attackedShip.name} was destroyed!\n`);
+                // console.log(`${attackedShip.name} was destroyed!\n`);
                 return
             }
               
@@ -55,41 +55,45 @@ for (let i = 1; i <= 6; i++){
   
 }
 
-console.log('\n', alienFleet);
-
+//console.log('\n', alienFleet);
 
 
 let alienNum = 0;
-
 let humanStart = true;
 
 while (alienNum < 6) {
   let alienShipInBattle = alienFleet[alienNum];
 
-  if (humanStart) {
-    humanShip.beginBattle(humanShip, alienShipInBattle);
-    humanStart = false;
-  } 
-  else {
-    alienShipInBattle.beginBattle(alienShipInBattle, humanShip);
-    humanStart = true;
+  // Prompt user for input
+    let userInput = 'attack'
+  if (alienNum > 0){
+    userInput = prompt("Do you want to attack or retreat?");
   }
-
-  if (alienShipInBattle.hull <= 0) {
-    //console.log(`${alienShipInBattle.name} was destroyed!`);
-    alienNum++;
-    // Ask the user if they want to continue playing
-    continueGame = confirm("Do you want to continue playing?");
-    
-    
-    if (alienNum === 6) {
-      console.log("Congratulations! You won and saved planet earth!");
+  
+  if (userInput.toLowerCase() === "attack" || userInput === null) {
+    if (humanStart) {
+      humanShip.beginBattle(humanShip, alienShipInBattle);
+      humanStart = false;
+    } else {
+      alienShipInBattle.beginBattle(alienShipInBattle, humanShip);
+      humanStart = true;
     }
-  } else {
-    console.log(`${humanShip.name} was destroyed by ${alienShipInBattle.name}!`);
+
+    if (alienShipInBattle.hull <= 0) {
+      console.log(`${alienShipInBattle.name} was destroyed!`);
+      alienNum++;
+
+      if (alienNum === 6) {
+        console.log("Congratulations! You won and saved planet earth!");
+      }
+    } else {
+      console.log(`${humanShip.name} was destroyed by ${alienShipInBattle.name}!`);
+      break;
+    }
+  } else if (userInput.toLowerCase() === "retreat") {
+    console.log("You retreated. Game over.");
     break;
+  } else {
+    console.log("Invalid input. Please enter 'attack' or 'retreat'.");
   }
 }
-
-
-
