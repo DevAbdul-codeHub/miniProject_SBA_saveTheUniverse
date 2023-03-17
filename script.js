@@ -1,5 +1,5 @@
-// Create a ship object for the humans
-const humanShip = {name: 'USS Assembly', hull: 20, firepower: 5, accuracy: .7};
+// Create a ship object for
+const humanShip = {name: 'USS Assembly', hull: 5, firepower: 5, accuracy: .7};
 
 class AlienShip {
     constructor()
