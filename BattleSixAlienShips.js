@@ -70,7 +70,7 @@ while (alienNum < 6) {
     userInput = prompt("Do you want to attack or retreat?");
   }
   
-  if (userInput.toLowerCase() === "attack" || userInput === null) {
+  if (userInput.toLowerCase() === "attack") {
     if (humanStart) {
       humanShip.beginBattle(humanShip, alienShipInBattle);
       humanStart = false;
@@ -93,7 +93,11 @@ while (alienNum < 6) {
   } else if (userInput.toLowerCase() === "retreat") {
     console.log("You retreated. Game over.");
     break;
-  } else {
+  } 
+  else if (userInput === null) {
+    console.log('You have not entered anything, game over!')
+  }
+    else {
     console.log("Invalid input. Please enter 'attack' or 'retreat'.");
   }
 }
